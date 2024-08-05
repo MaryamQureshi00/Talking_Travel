@@ -1,0 +1,556 @@
+@charset "UTF-8";
+@import url("inline.css");
+@import url("root.css");
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+body header {
+  transition: 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+  padding: 1rem 2rem;
+  gap: 15px;
+}
+body header::before {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 0%;
+  height: 3px;
+  background: var(--primaryColor);
+  animation: scrollProgress linear;
+  animation-timeline: scroll();
+}
+@keyframes scrollProgress {
+  100% {
+    width: 100%;
+  }
+}
+body header img {
+  width: 6rem;
+}
+body header[shrink=true] {
+  top: 0;
+  left: 0;
+  position: fixed;
+  width: 100%;
+  height: 120px;
+  background: rgba(255, 255, 255, 0.877);
+  z-index: 9;
+  -webkit-backdrop-filter: blur(4px);
+          backdrop-filter: blur(4px);
+  border-bottom: 1px solid var(--lightDivColor);
+}
+body header[shrink=true] img {
+  transition: 0.2s cubic-bezier(0.165, 0.84, 0.44, 1);
+  width: 3rem;
+}
+body header ul {
+  list-style-type: none;
+  gap: 20px;
+}
+body header ul li {
+  transition: 0.2s ease;
+  color: var(--headerTextColor);
+  cursor: pointer;
+  font-size: clamp(10px, 3vw, 16px);
+}
+body header ul li:hover {
+  scale: 1.1;
+  color: var(--primaryColor);
+}
+body header ul li:nth-last-child(1) {
+  margin-bottom: -7px;
+}
+body header ul li:nth-last-child(1) svg {
+  fill: var(--primaryColor);
+  width: 24px;
+  height: 24px;
+}
+body header ul li:nth-last-child(2) {
+  stroke-width: 1.5px;
+  margin-bottom: -7px;
+}
+body header ul li:nth-last-child(2) svg {
+  fill: none;
+  stroke: var(--primaryColor);
+  width: 18px;
+  height: 18px;
+}
+body header ul .active {
+  color: var(--primaryColor);
+}
+body .hero-banner {
+  width: 100%;
+  height: calc(100svh - 130.35px);
+  background: linear-gradient(rgba(30, 31, 32, 0.7137254902), rgba(30, 31, 32, 0.7137254902)), url("https://source.unsplash.com/random/900×700/?travel+girl");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+  gap: 20px;
+  padding: 0 1.5rem;
+}
+body .hero-banner h1 {
+  font-size: clamp(40px, 6vw, 70px);
+  color: var(--lightDivColor);
+  max-width: 40rem;
+  text-align: center;
+}
+body .hero-banner h1 span {
+  color: var(--primaryColor);
+  text-decoration: underline;
+}
+body .hero-banner p {
+  text-align: center;
+  color: var(--lightDivColor);
+  opacity: 70%;
+  font-size: clamp(15px, 3.5vw, 30px);
+  max-width: 45rem;
+}
+body .hero-banner button {
+  transition: 0.2s cubic-bezier(0.165, 0.84, 0.44, 1);
+  border-radius: 100px;
+  width: max-width;
+  height: -moz-fit-content;
+  height: fit-content;
+  background: transparent;
+  padding: 0.8rem 1.8rem;
+  border: 1px solid var(--primaryColor);
+  outline: none;
+  color: var(--primaryColor);
+  font-size: 20px;
+  cursor: pointer;
+}
+body .hero-banner button:hover {
+  background-color: var(--primaryColor);
+  color: var(--blackColor);
+}
+body .why-us {
+  width: 100%;
+  height: 100svh;
+  background: transparent;
+  padding: 4rem;
+  gap: 6rem;
+}
+body .why-us .text-align {
+  gap: 30px;
+}
+body .why-us .text-align svg {
+  width: 60px;
+  height: 60px;
+}
+body .why-us .text-align h2 {
+  font-size: 40px;
+}
+body .why-us .text-align p {
+  color: var(--headerTextColor);
+}
+body .why-us .text-align button {
+  transition: 0.2s cubic-bezier(0.165, 0.84, 0.44, 1);
+  border-radius: 6px;
+  padding: 0.8rem 2.4rem;
+  width: max-width;
+  height: -moz-fit-content;
+  height: fit-content;
+  background: var(--lightDivColor);
+  border: none;
+  outline: none;
+  color: var(--blackColor);
+  cursor: pointer;
+}
+body .why-us .text-align button:hover {
+  background-color: var(--primaryColor);
+}
+body .why-us img {
+  width: 40rem;
+  border-radius: 8px;
+  box-shadow: 5px 5px 20px 0 var(--lightDivColor), 25px 25px 0 0 var(--lightDivColor);
+}
+@media (max-width: 1280px) {
+  body .why-us {
+    height: -moz-fit-content;
+    height: fit-content;
+    flex-direction: column;
+    padding: 3rem 2rem;
+    gap: 3rem;
+  }
+  body .why-us img {
+    width: 100%;
+  }
+}
+body .highlight-bar {
+  width: 100%;
+  height: 50svh;
+  background: linear-gradient(rgba(236, 236, 236, 0.9137254902), rgba(236, 236, 236, 0.9137254902)), url("https://source.unsplash.com/random/900×400/?colors");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-attachment: fixed;
+  background-size: cover;
+  padding: 1rem 2rem;
+  gap: 20px;
+  animation: expand linear;
+  animation-timeline: view();
+}
+body .highlight-bar svg {
+  width: 60px;
+  height: 60px;
+  animation: zoom linear;
+  animation-timeline: view();
+}
+@keyframes zoom {
+  80% {
+    scale: 1.5;
+    rotate: 360deg;
+  }
+  100% {
+    rotate: 360deg;
+  }
+}
+@keyframes expand {
+  100% {
+    gap: 40px;
+  }
+}
+body .highlight-bar p,
+body .highlight-bar h2 {
+  text-align: center;
+}
+@media (max-width: 700px) {
+  body .highlight-bar {
+    gap: 10px;
+  }
+}
+body .about-us {
+  width: 100%;
+  height: 100svh;
+  background: transparent;
+  padding: 4rem;
+  gap: 6rem;
+}
+body .about-us .text-align {
+  gap: 30px;
+}
+body .about-us .text-align svg {
+  width: 60px;
+  height: 60px;
+}
+body .about-us .text-align h2 {
+  font-size: 40px;
+}
+body .about-us .text-align p {
+  color: var(--headerTextColor);
+}
+body .about-us .text-align button {
+  transition: 0.2s cubic-bezier(0.165, 0.84, 0.44, 1);
+  border-radius: 6px;
+  padding: 0.8rem 2.4rem;
+  width: max-width;
+  height: -moz-fit-content;
+  height: fit-content;
+  background: var(--lightDivColor);
+  border: none;
+  outline: none;
+  color: var(--blackColor);
+  cursor: pointer;
+}
+body .about-us .text-align button:hover {
+  background-color: var(--primaryColor);
+}
+body .about-us img {
+  width: 40rem;
+  border-radius: 8px;
+  box-shadow: 5px 5px 20px 0 var(--lightDivColor), 25px 25px 0 0 var(--lightDivColor);
+}
+@media (max-width: 1280px) {
+  body .about-us {
+    height: -moz-fit-content;
+    height: fit-content;
+    flex-direction: column;
+    gap: 3rem;
+    padding: 3rem 2rem;
+  }
+  body .about-us img {
+    width: 100%;
+  }
+}
+body .highlight-page {
+  width: 100%;
+  height: 100svh;
+  background: linear-gradient(#ffffff 30%, rgba(236, 236, 236, 0.1058823529)), url("https://source.unsplash.com/random/900×400/?mountains+beach+ocean+country+night+sky");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-attachment: fixed;
+  background-size: cover;
+  gap: 20px;
+  padding: 4rem;
+  animation: expand linear;
+  animation-timeline: view();
+}
+body .highlight-page svg {
+  width: 60px;
+  height: 60px;
+  animation: zoom linear;
+  animation-timeline: view();
+}
+@keyframes zoom {
+  80% {
+    scale: 1.5;
+    rotate: -360deg;
+  }
+  100% {
+    rotate: -360deg;
+  }
+}
+@keyframes expand {
+  100% {
+    gap: 60px;
+  }
+}
+body .highlight-page button {
+  transition: 0.2s cubic-bezier(0.165, 0.84, 0.44, 1);
+  padding: 0.8rem 2.4rem;
+  background-color: var(--lightDivColor);
+  border-radius: 6px;
+  border: none;
+  cursor: pointer;
+  animation: active linear;
+  animation-timeline: view();
+}
+body .highlight-page button:hover {
+  margin-left: 1rem;
+}
+@keyframes active {
+  100% {
+    border: 1px solid var(--blackColor);
+    background-color: transparent;
+  }
+}
+body .brand-co {
+  width: 100%;
+  height: 50svh;
+  background: transparent;
+  padding: 4rem;
+  gap: 30px;
+}
+body .brand-co h2 {
+  font-size: 30px;
+  color: var(--headerTextColor);
+  text-align: center;
+}
+body .brand-co .rad-line {
+  width: 5%;
+  height: 5px;
+  background: var(--primaryColor);
+  border-radius: 100px;
+}
+body .brand-co .block-co img {
+  width: 15rem;
+}
+@media (max-width: 1280px) {
+  body .brand-co {
+    height: -moz-fit-content;
+    height: fit-content;
+  }
+  body .brand-co .block-co {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(10rem, auto));
+  }
+}
+body .gallery {
+  width: 100%;
+  height: -moz-fit-content;
+  height: fit-content;
+  background: transparent;
+  padding: 4rem;
+  gap: 30px;
+}
+body .gallery h2 {
+  font-size: 30px;
+  color: var(--headerTextColor);
+}
+body .gallery .block-co {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(30rem, auto));
+  gap: 10px;
+}
+@media (max-width: 750px) {
+  body .gallery .block-co {
+    grid-template-columns: repeat(auto-fill, minmax(20rem, auto));
+  }
+}
+body .gallery .block-co .img-card {
+  overflow: hidden;
+  border-radius: 8px;
+  max-height: 50svh;
+}
+body .gallery .block-co .img-card img {
+  width: 100%;
+  height: 100%;
+  -o-object-fit: cover;
+     object-fit: cover;
+}
+@media (min-width: 1280px) {
+  body .gallery .block-co .img-card:nth-child(3) {
+    grid-column: span 2;
+    height: 50svh;
+  }
+}
+body .contact {
+  width: calc(100% - 8rem);
+  height: -moz-fit-content;
+  height: fit-content;
+  background: var(--lightDivColor);
+  margin: 4rem;
+  gap: 30px;
+  padding: 2rem;
+  border-radius: 10px;
+}
+body .contact iframe {
+  border: none;
+  border-radius: 8px;
+  width: 100%;
+  outline: none;
+}
+body .contact form {
+  width: 100%;
+  height: 100%;
+  background: transparent;
+  border-radius: 8px;
+  max-width: 30rem;
+  gap: 20px;
+}
+body .contact form h2 {
+  font-size: 35px;
+  color: var(--headerTextColor);
+}
+body .contact form p {
+  font-size: 12px;
+  color: var(--headerTextColor);
+}
+body .contact form .no-gap {
+  gap: 8px;
+  width: inherit;
+}
+body .contact form .no-gap input,
+body .contact form .no-gap textarea {
+  transition: 0.2s cubic-bezier(0.19, 1, 0.22, 1);
+  border: 1px solid var(--headerTextColor);
+  width: inherit;
+  padding: 0.7rem 0.5rem;
+  outline: none;
+  border-radius: 4px;
+  resize: none;
+}
+body .contact form .no-gap input:hover, body .contact form .no-gap input:focus,
+body .contact form .no-gap textarea:hover,
+body .contact form .no-gap textarea:focus {
+  box-shadow: 0 0 0 2px var(--blackColorOpacity);
+}
+body .contact form .no-gap textarea {
+  height: 13vh;
+}
+body .contact form input[type=submit] {
+  transition: 0.2s cubic-bezier(0.165, 0.84, 0.44, 1);
+  background-color: var(--blackColor);
+  color: var(--lightDivColor);
+  border-radius: 4px;
+  padding: 0.5rem 1.8rem;
+  outline: none;
+  border: none;
+  cursor: pointer;
+}
+body .contact form input[type=submit]:hover {
+  background-color: var(--primaryColor);
+  color: var(--blackColor);
+}
+@media (max-width: 990px) {
+  body .contact {
+    height: -moz-fit-content;
+    height: fit-content;
+    flex-direction: column;
+    margin: 1rem;
+    width: calc(100% - 2rem);
+  }
+}
+body footer {
+  border-top: 1px solid var(--lightDivColor);
+  padding: 1.5rem;
+  min-height: 50vh;
+  max-height: -moz-fit-content;
+  max-height: fit-content;
+  width: 100%;
+  background-image: url("../imgs/footer.jpg");
+  background-position: center;
+  background-size: cover;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: row;
+}
+body footer .center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: row;
+  width: 60rem;
+}
+body footer .center .align-center {
+  grid-template-columns: repeat(auto-fit, minmax(17rem, 20rem));
+  width: 100%;
+  display: grid;
+  row-gap: 38px;
+}
+body footer .center .align-center img {
+  width: 15rem;
+}
+body footer .center .align-center .col {
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-start;
+  flex-direction: column;
+}
+body footer .center .align-center .col h2 {
+  margin-bottom: 1rem;
+  color: var(--primaryColor);
+  font-size: 20px;
+}
+body footer .center .align-center .col a {
+  text-decoration: none;
+  color: var(--headerTextColor);
+  margin-bottom: 0.5rem;
+}
+body footer .center .align-center .col a:hover {
+  color: var(--primaryColor);
+}
+body footer .center .align-center .col .active {
+  color: var(--primaryColor);
+}
+body footer .center .align-center .col .row {
+  margin-left: 0;
+  margin-top: 0.5rem;
+}
+body footer .center .align-center .col .row a {
+  transition: 0.2s ease;
+  background-color: var(--primaryColor);
+  width: 3rem;
+  height: 3rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: row;
+  margin-right: 0.5rem;
+  border: 1px solid var(--primaryColor);
+}
+body footer .center .align-center .col .row a svg {
+  transition: 0.2s ease;
+  stroke: var(--lightDivColor);
+}
+body footer .center .align-center .col .row a:hover {
+  background: transparent;
+}
+body footer .center .align-center .col .row a:hover svg {
+  stroke: var(--primaryColor);
+}/*# sourceMappingURL=style.css.map */

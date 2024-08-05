@@ -1,0 +1,527 @@
+@import url("inline.css");
+@import url("root.css");
+$primaryColor: var(--primaryColor);
+$headerTextColor: var(--headerTextColor);
+$lightDivColor: var(--lightDivColor);
+$blackColor: var(--blackColor);
+$blackColorOpacity: var(--blackColorOpacity);
+@mixin square($e) {
+  width: $e;
+  height: $e;
+}
+@mixin base($w, $h, $b) {
+  width: $w;
+  height: $h;
+  background: $b;
+}
+@mixin flex($j, $a, $d) {
+  display: flex;
+  justify-content: $j;
+  align-items: $a;
+  flex-direction: $d;
+}
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: Arial, Helvetica, sans-serif;
+}
+body {
+  header {
+    transition: 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+    padding: 1rem 2rem;
+    gap: 15px;
+    &::before {
+      content: "";
+      position: fixed;
+      top: 0;
+      left: 0;
+      @include base(0%, 3px, $primaryColor);
+      animation: scrollProgress linear;
+      animation-timeline: scroll();
+      @keyframes scrollProgress {
+        100% {
+          width: 100%;
+        }
+      }
+    }
+    img {
+      width: 6rem;
+    }
+    &[shrink="true"] {
+      img {
+        transition: 0.2s cubic-bezier(0.165, 0.84, 0.44, 1);
+        width: 3rem;
+      }
+      top: 0;
+      left: 0;
+      position: fixed;
+      @include base(100%, 120px, rgba(255, 255, 255, 0.877));
+      z-index: 9;
+      backdrop-filter: blur(4px);
+      border-bottom: 1px solid $lightDivColor;
+    }
+    ul {
+      list-style-type: none;
+      gap: 20px;
+      li {
+        transition: 0.2s ease;
+        color: $headerTextColor;
+        cursor: pointer;
+        font-size: clamp(10px, 3vw, 16px);
+        &:hover {
+          scale: 1.1;
+          color: $primaryColor;
+        }
+        &:nth-last-child(1) {
+          margin-bottom: -7px;
+          svg {
+            fill: $primaryColor;
+            @include square(24px);
+          }
+        }
+        &:nth-last-child(2) {
+          stroke-width: 1.5px;
+          margin-bottom: -7px;
+          svg {
+            fill: none;
+            stroke: $primaryColor;
+            @include square(18px);
+          }
+        }
+      }
+      .active {
+        color: $primaryColor;
+      }
+    }
+  }
+  .hero-banner {
+    @include base(
+      100%,
+      calc(100svh - 130.35px),
+      (
+        linear-gradient(#1e1f20b6, #1e1f20b6),
+        url("https://source.unsplash.com/random/900×700/?travel+girl")
+      )
+    );
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    gap: 20px;
+    padding: 0 1.5rem;
+    h1 {
+      font-size: clamp(40px, 6vw, 70px);
+      color: $lightDivColor;
+      max-width: 40rem;
+      text-align: center;
+      span {
+        color: $primaryColor;
+        text-decoration: underline;
+      }
+    }
+    p {
+      text-align: center;
+      color: $lightDivColor;
+      opacity: 70%;
+      font-size: clamp(15px, 3.5vw, 30px);
+      max-width: 45rem;
+    }
+    button {
+      transition: 0.2s cubic-bezier(0.165, 0.84, 0.44, 1);
+      border-radius: 100px;
+      @include base(max-width, fit-content, transparent);
+      padding: 0.8rem 1.8rem;
+      border: 1px solid $primaryColor;
+      outline: none;
+      color: $primaryColor;
+      font-size: 20px;
+      cursor: pointer;
+      &:hover {
+        background-color: $primaryColor;
+        color: $blackColor;
+      }
+    }
+  }
+  .why-us {
+    @include base(100%, 100svh, transparent);
+    padding: 4rem;
+    gap: 6rem;
+    .text-align {
+      gap: 30px;
+      svg {
+        @include square(60px);
+      }
+      h2 {
+        font-size: 40px;
+      }
+      p {
+        color: $headerTextColor;
+      }
+      button {
+        transition: 0.2s cubic-bezier(0.165, 0.84, 0.44, 1);
+        border-radius: 6px;
+        padding: 0.8rem 2.4rem;
+        @include base(max-width, fit-content, $lightDivColor);
+        border: none;
+        outline: none;
+        color: $blackColor;
+        cursor: pointer;
+        &:hover {
+          background-color: $primaryColor;
+        }
+      }
+    }
+    img {
+      width: 40rem;
+      border-radius: 8px;
+      box-shadow: 5px 5px 20px 0 $lightDivColor, 25px 25px 0 0 $lightDivColor;
+    }
+    @media (max-width: 1280px) {
+      height: fit-content;
+      flex-direction: column;
+      padding: 3rem 2rem;
+      gap: 3rem;
+      img {
+        width: 100%;
+      }
+    }
+  }
+  .highlight-bar {
+    @include base(
+      100%,
+      calc(50svh),
+      (
+        linear-gradient(#ececece9, #ececece9),
+        url("https://source.unsplash.com/random/900×400/?colors")
+      )
+    );
+    background-repeat: no-repeat;
+    background-position: center;
+    background-attachment: fixed;
+    background-size: cover;
+    padding: 1rem 2rem;
+    gap: 20px;
+    svg {
+      @include square(60px);
+      animation: zoom linear;
+      animation-timeline: view();
+      @keyframes zoom {
+        80% {
+          scale: 1.5;
+          rotate: 360deg;
+        }
+        100% {
+          rotate: 360deg;
+        }
+      }
+    }
+    animation: expand linear;
+    animation-timeline: view();
+    @keyframes expand {
+      100% {
+        gap: 40px;
+      }
+    }
+    p,
+    h2 {
+      text-align: center;
+    }
+    @media (max-width: 700px) {
+      gap: 10px;
+    }
+  }
+  .about-us {
+    @include base(100%, 100svh, transparent);
+    padding: 4rem;
+    gap: 6rem;
+    .text-align {
+      gap: 30px;
+      svg {
+        @include square(60px);
+      }
+      h2 {
+        font-size: 40px;
+      }
+      p {
+        color: $headerTextColor;
+      }
+      button {
+        transition: 0.2s cubic-bezier(0.165, 0.84, 0.44, 1);
+        border-radius: 6px;
+        padding: 0.8rem 2.4rem;
+        @include base(max-width, fit-content, $lightDivColor);
+        border: none;
+        outline: none;
+        color: $blackColor;
+        cursor: pointer;
+        &:hover {
+          background-color: $primaryColor;
+        }
+      }
+    }
+    img {
+      width: 40rem;
+      border-radius: 8px;
+      box-shadow: 5px 5px 20px 0 $lightDivColor, 25px 25px 0 0 $lightDivColor;
+    }
+    @media (max-width: 1280px) {
+      height: fit-content;
+      flex-direction: column;
+      gap: 3rem;
+      padding: 3rem 2rem;
+      img {
+        width: 100%;
+      }
+    }
+  }
+  .highlight-page {
+    @include base(
+      100%,
+      calc(100svh),
+      (
+        linear-gradient(#ffffff 30%, #ececec1b),
+        url("https://source.unsplash.com/random/900×400/?mountains+beach+ocean+country+night+sky")
+      )
+    );
+    background-repeat: no-repeat;
+    background-position: center;
+    background-attachment: fixed;
+    background-size: cover;
+    gap: 20px;
+    padding: 4rem;
+    svg {
+      @include square(60px);
+      animation: zoom linear;
+      animation-timeline: view();
+      @keyframes zoom {
+        80% {
+          scale: 1.5;
+          rotate: -360deg;
+        }
+        100% {
+          rotate: -360deg;
+        }
+      }
+    }
+    animation: expand linear;
+    animation-timeline: view();
+    @keyframes expand {
+      100% {
+        gap: 60px;
+      }
+    }
+    button {
+      transition: 0.2s cubic-bezier(0.165, 0.84, 0.44, 1);
+      padding: 0.8rem 2.4rem;
+      background-color: $lightDivColor;
+      border-radius: 6px;
+      border: none;
+      cursor: pointer;
+      &:hover {
+        margin-left: 1rem;
+      }
+      animation: active linear;
+      animation-timeline: view();
+      @keyframes active {
+        100% {
+          border: 1px solid $blackColor;
+          background-color: transparent;
+        }
+      }
+    }
+  }
+  .brand-co {
+    @include base(100%, 50svh, transparent);
+    padding: 4rem;
+    gap: 30px;
+    h2 {
+      font-size: 30px;
+      color: $headerTextColor;
+      text-align: center;
+    }
+    .rad-line {
+      @include base(5%, 5px, $primaryColor);
+      border-radius: 100px;
+    }
+    .block-co {
+      img {
+        width: 15rem;
+      }
+    }
+    @media (max-width: 1280px) {
+      height: fit-content;
+      .block-co {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(10rem, auto));
+      }
+    }
+  }
+  .gallery {
+    @include base(100%, fit-content, transparent);
+    padding: 4rem;
+    gap: 30px;
+    h2 {
+      font-size: 30px;
+      color: $headerTextColor;
+    }
+    .block-co {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(30rem, auto));
+      @media (max-width: 750px) {
+        grid-template-columns: repeat(auto-fill, minmax(20rem, auto));
+      }
+      gap: 10px;
+      .img-card {
+        overflow: hidden;
+        border-radius: 8px;
+        max-height: 50svh;
+        img {
+          @include square(100%);
+          object-fit: cover;
+        }
+        @media (min-width: 1280px) {
+          &:nth-child(3) {
+            grid-column: span 2;
+            height: 50svh;
+          }
+        }
+      }
+    }
+  }
+  .contact {
+    @include base(calc(100% - 8rem), fit-content, $lightDivColor);
+    margin: 4rem;
+    gap: 30px;
+    padding: 2rem;
+    border-radius: 10px;
+    iframe {
+      border: none;
+      border-radius: 8px;
+      width: 100%;
+      outline: none;
+    }
+    form {
+      @include base(100%, 100%, transparent);
+      border-radius: 8px;
+      max-width: 30rem;
+      gap: 20px;
+      h2 {
+        font-size: 35px;
+        color: $headerTextColor;
+      }
+      p {
+        font-size: 12px;
+        color: $headerTextColor;
+      }
+      .no-gap {
+        gap: 8px;
+        width: inherit;
+        input,
+        textarea {
+          transition: 0.2s cubic-bezier(0.19, 1, 0.22, 1);
+          border: 1px solid $headerTextColor;
+          width: inherit;
+          padding: 0.7rem 0.5rem;
+          outline: none;
+          border-radius: 4px;
+          resize: none;
+          &:hover,
+          &:focus {
+            box-shadow: 0 0 0 2px $blackColorOpacity;
+          }
+        }
+        textarea {
+          height: 13vh;
+        }
+      }
+      input {
+        &[type="submit"] {
+          transition: 0.2s cubic-bezier(0.165, 0.84, 0.44, 1);
+          background-color: $blackColor;
+          color: $lightDivColor;
+          border-radius: 4px;
+          padding: 0.5rem 1.8rem;
+          outline: none;
+          border: none;
+          cursor: pointer;
+          &:hover {
+            background-color: $primaryColor;
+            color: $blackColor;
+          }
+        }
+      }
+    }
+    @media (max-width: 990px) {
+      height: fit-content;
+      flex-direction: column;
+      margin: 1rem;
+      width: calc(100% - 2rem);
+    }
+  }
+  footer {
+    border-top: 1px solid $lightDivColor;
+    padding: 1.5rem;
+    min-height: 50vh;
+    max-height: fit-content;
+    width: 100%;
+    background-image: url("../imgs/footer.jpg");
+    background-position: center;
+    background-size: cover;
+    @include flex(center, center, row);
+    .center {
+      @include flex(center, center, row);
+      width: 60rem;
+      .align-center {
+        grid-template-columns: repeat(auto-fit, minmax(17rem, 20rem));
+        width: 100%;
+        display: grid;
+        row-gap: 38px;
+        img {
+          width: 15rem;
+        }
+        .col {
+          @include flex(flex-start, flex-start, column);
+          h2 {
+            margin-bottom: 1rem;
+            color: $primaryColor;
+            font-size: 20px;
+          }
+          a {
+            text-decoration: none;
+            color: $headerTextColor;
+            margin-bottom: 0.5rem;
+            &:hover {
+              color: $primaryColor;
+            }
+          }
+          .active {
+            color: $primaryColor;
+          }
+          .row {
+            margin-left: 0;
+            margin-top: 0.5rem;
+            a {
+              transition: 0.2s ease;
+              background-color: $primaryColor;
+              width: 3rem;
+              height: 3rem;
+              @include flex(center, center, row);
+              margin-right: 0.5rem;
+              border: 1px solid $primaryColor;
+              svg {
+                transition: 0.2s ease;
+                stroke: $lightDivColor;
+              }
+              &:hover {
+                background: transparent;
+                svg {
+                  stroke: $primaryColor;
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
